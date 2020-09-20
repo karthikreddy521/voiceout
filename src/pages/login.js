@@ -13,6 +13,12 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import axios from 'axios';
 
+// check why this is not working later.
+// const styles = (theme) => ({
+//     ...theme   
+//   });
+
+  
 const styles =  {
 form: {
    textAlign: 'center'
@@ -62,6 +68,7 @@ class login extends Component {
       }
     axios.post('http://localhost:5000/voiceout-dc233/us-central1/api/login', userData)
       .then(res => { 
+        localStorage.setItem('FBIdtoken', `Bearer ${res.data.token}`);
             this.setState({
             loading: false
           });
@@ -81,8 +88,7 @@ class login extends Component {
     }
     render() {
         const { classes } = this.props;
-        const { errors, loading } = this.state;
-        console.log(errors);
+        const { errors, loading } = this.state; 
         return (
              <Grid container className={classes.form}>
                  <Grid item sm/>
